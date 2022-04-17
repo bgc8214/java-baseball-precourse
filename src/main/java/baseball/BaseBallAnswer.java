@@ -29,4 +29,20 @@ public class BaseBallAnswer {
         return answer;
     }
 
+    public AnswerResult makeAnswerResult(int userAnswer) {
+        AnswerResult answerResult = new AnswerResult();
+        for (int i = 2; i >= 0; i--) {
+            int answerNumber = userAnswer % 10;
+            if (answer.get(i) == answerNumber) {
+                answerResult.addStrikeCount();
+            }
+            if (answer.get(i) != answerNumber && answer.contains(answerNumber)) {
+                answerResult.addBallCount();
+            }
+            userAnswer = userAnswer / 10;
+        }
+
+        return answerResult;
+    }
+
 }

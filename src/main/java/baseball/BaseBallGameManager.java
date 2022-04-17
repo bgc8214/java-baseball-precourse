@@ -15,6 +15,8 @@ public class BaseBallGameManager {
         validateInteger(userAnswer);
         validateAnswerSize(userAnswer);
         validateDifferentNumber(userAnswer);
+        baseBallNumber.isCorrectAnswer(Integer.valueOf(userAnswer));
+        baseBallNumber.printAnswer();
     }
 
     private void validateAnswerSize(String userAnswer) {
@@ -26,7 +28,13 @@ public class BaseBallGameManager {
 
     private void validateDifferentNumber(String userAnswer) {
         int number = Integer.valueOf(userAnswer);
-        Set<Integer> answerSet = new HashSet<>(number);
+        Set<Integer> answerSet = new HashSet<>();
+
+        while (number > 0) {
+            answerSet.add(number % 10);
+            number = number / 10;
+        }
+
         if (answerSet.size() != 3) {
             throw new IllegalArgumentException("서로 다른 3자리의 숫자를 입력하여주세요.");
         }
