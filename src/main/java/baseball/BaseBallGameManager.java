@@ -7,15 +7,22 @@ public class BaseBallGameManager {
 
     private BaseBallNumber baseBallNumber;
 
+    private boolean isFinished = false;
+
     public BaseBallGameManager() {
         baseBallNumber = new BaseBallNumber();
     }
+
+    public boolean isFinished() {
+        return isFinished;
+    }
+
 
     public void checkUserAnswer(String userAnswer) {
         validateInteger(userAnswer);
         validateAnswerSize(userAnswer);
         validateDifferentNumber(userAnswer);
-        baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer));
+        isFinished = baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer)).isCorrectAnswer();
         baseBallNumber.printAnswer();
     }
 
