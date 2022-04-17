@@ -4,12 +4,24 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class BaseBallAnswer {
 
     private static final int ANSWER_SIZE = 3;
 
     private List<Integer> answer = new ArrayList<>();
+
+    public BaseBallAnswer(int userAnswer) {
+        Stack<Integer> answerStack = new Stack();
+        while (userAnswer > 0) {
+            answerStack.push(userAnswer % 10);
+            userAnswer = userAnswer / 10;
+        }
+        while (!answerStack.empty()) {
+            answer.add(answerStack.pop());
+        }
+    }
 
     public BaseBallAnswer() {
         while (answer.size() != ANSWER_SIZE) {
@@ -33,15 +45,10 @@ public class BaseBallAnswer {
         AnswerResult answerResult = new AnswerResult();
         for (int i = 2; i >= 0; i--) {
             int answerNumber = userAnswer % 10;
-            if (answer.get(i) == answerNumber) {
-                answerResult.addStrikeCount();
-            }
-            if (answer.get(i) != answerNumber && answer.contains(answerNumber)) {
-                answerResult.addBallCount();
-            }
+            answerResult.addStrikeCount(answer.get(i), answerNumber);
+            answerResult.addBallCount(answer.get(i), answerNumber, answer);
             userAnswer = userAnswer / 10;
         }
-
         return answerResult;
     }
 

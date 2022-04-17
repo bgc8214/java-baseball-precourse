@@ -15,7 +15,7 @@ public class BaseBallGameManager {
         validateInteger(userAnswer);
         validateAnswerSize(userAnswer);
         validateDifferentNumber(userAnswer);
-        baseBallNumber.isCorrectAnswer(Integer.valueOf(userAnswer));
+        baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer));
         baseBallNumber.printAnswer();
     }
 

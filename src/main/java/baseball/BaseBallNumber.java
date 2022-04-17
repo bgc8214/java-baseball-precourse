@@ -6,14 +6,18 @@ public class BaseBallNumber {
 
     private BaseBallAnswer baseBallAnswer;
 
+    public BaseBallNumber(int userAnswer) {
+        baseBallAnswer = new BaseBallAnswer(userAnswer);
+    }
+
     public BaseBallNumber() {
         baseBallAnswer = new BaseBallAnswer();
     }
 
-    public boolean isCorrectAnswer(int userAnswer) {
+    public AnswerResult findAnswerResult(int userAnswer) {
         AnswerResult answerResult = baseBallAnswer.makeAnswerResult(userAnswer);
         System.out.println(answerResult);
-        return answerResult.isCorrectAnswer();
+        return answerResult;
     }
 
     public void printAnswer() {

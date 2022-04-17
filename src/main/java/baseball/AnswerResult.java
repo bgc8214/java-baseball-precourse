@@ -1,5 +1,6 @@
 package baseball;
 
+import java.util.List;
 import java.util.Objects;
 
 public class AnswerResult {
@@ -16,12 +17,16 @@ public class AnswerResult {
         this.strikeCount = strikeCount;
     }
 
-    public void addBallCount() {
-        ballCount++;
+    public void addBallCount(int compareNumber, int answerNumber, List<Integer> answer) {
+        if (compareNumber != answerNumber && answer.contains(answerNumber)) {
+            ballCount++;
+        }
     }
 
-    public void addStrikeCount() {
-        strikeCount++;
+    public void addStrikeCount(int compareNumber, int answerNumber) {
+        if (compareNumber == answerNumber) {
+            strikeCount++;
+        }
     }
 
     public boolean isCorrectAnswer() {
