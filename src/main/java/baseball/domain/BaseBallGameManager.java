@@ -10,7 +10,6 @@ public class BaseBallGameManager {
     public static final String END_GAME_ANSWER = "2";
     private boolean isFinished = false;
 
-
     public BaseBallGameManager() {
         baseBallNumber = new BaseBallNumber();
     }
@@ -18,7 +17,6 @@ public class BaseBallGameManager {
     public boolean isFinished() {
         return isFinished;
     }
-
 
     public boolean checkUserAnswer(String userAnswer) {
         isFinished = baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer)).isCorrectAnswer();
@@ -34,8 +32,6 @@ public class BaseBallGameManager {
         validateAnswerSize(userAnswer);
         validateDifferentNumber(userAnswer);
     }
-
-
 
     public void prepareNextGame(String retryAnswer) {
         if (retryAnswer.equals(END_GAME_ANSWER)) {
@@ -62,7 +58,6 @@ public class BaseBallGameManager {
             answerSet.add(number % 10);
             number = number / 10;
         }
-
         if (answerSet.size() != 3) {
             throw new IllegalArgumentException("서로 다른 3자리의 숫자를 입력하여주세요.");
         }
@@ -70,7 +65,7 @@ public class BaseBallGameManager {
 
     private static void validateInteger(String userAnswer) {
         try {
-            int number = Integer.valueOf(userAnswer);
+            Integer.valueOf(userAnswer);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("숫자가 아닌 값을 입력하였습니다.");
         }

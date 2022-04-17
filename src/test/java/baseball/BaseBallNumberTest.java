@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 public class BaseBallNumberTest {
 
+    @DisplayName("서로 다른 값을 생성")
     @Test
     public void create_different_number_test() {
         BaseBallNumber baseBallNumber = new BaseBallNumber();

@@ -9,7 +9,6 @@ public class BaseBallController {
 
 
     public static void startGame() {
-
         BaseBallGameManager baseBallGameManager = new BaseBallGameManager();
 
         while (!baseBallGameManager.isFinished()) {
