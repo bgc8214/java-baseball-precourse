@@ -1,4 +1,4 @@
-package baseball;
+package baseball.domain;
 
 import java.util.Arrays;
 
@@ -16,7 +16,6 @@ public class BaseBallNumber {
 
     public AnswerResult findAnswerResult(int userAnswer) {
         AnswerResult answerResult = baseBallAnswer.makeAnswerResult(userAnswer);
-        System.out.println(answerResult);
         return answerResult;
     }
 

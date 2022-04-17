@@ -1,15 +1,15 @@
-package baseball;
+package baseball.domain;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.HashSet;
 import java.util.Set;
 
 public class BaseBallGameManager {
 
     private BaseBallNumber baseBallNumber;
-    private static final String RETRY_GAME_ANSWER = "1";
-    private static final String END_GAME_ANSWER = "2";
+    public static final String RETRY_GAME_ANSWER = "1";
+    public static final String END_GAME_ANSWER = "2";
     private boolean isFinished = false;
+
 
     public BaseBallGameManager() {
         baseBallNumber = new BaseBallNumber();
@@ -19,24 +19,25 @@ public class BaseBallGameManager {
         return isFinished;
     }
 
-    public void checkUserAnswer(String userAnswer) {
+
+    public boolean checkUserAnswer(String userAnswer) {
+        isFinished = baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer)).isCorrectAnswer();
+        return baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer)).isCorrectAnswer();
+    }
+
+    public AnswerResult findAnswerResult(String userAnswer) {
+        return baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer));
+    }
+
+    public static void validate(String userAnswer) {
         validateInteger(userAnswer);
         validateAnswerSize(userAnswer);
         validateDifferentNumber(userAnswer);
-        isFinished = baseBallNumber.findAnswerResult(Integer.valueOf(userAnswer)).isCorrectAnswer();
-        enterRetryGame(isFinished);
     }
 
-    private void enterRetryGame(boolean isFinished) {
-        if (isFinished) {
-            System.out.println("3개의 숫자를 모두 맞혔습니다. 게임 끝!");
-            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요");
-            prepareNextGame();
-        }
-    }
 
-    private void prepareNextGame() {
-        String retryAnswer = enterRetryAnswer();
+
+    public void prepareNextGame(String retryAnswer) {
         if (retryAnswer.equals(END_GAME_ANSWER)) {
             return;
         }
@@ -46,22 +47,14 @@ public class BaseBallGameManager {
         }
     }
 
-    private String enterRetryAnswer() {
-        String retryAnswer;
-        do {
-            retryAnswer = Console.readLine();
-        } while (!retryAnswer.equals(END_GAME_ANSWER) && !retryAnswer.equals(RETRY_GAME_ANSWER));
-        return retryAnswer;
-    }
-
-    private void validateAnswerSize(String userAnswer) {
+    private static void validateAnswerSize(String userAnswer) {
         int number = Integer.valueOf(userAnswer);
         if (number < 100 || number >= 1000) {
             throw new IllegalArgumentException("3자리의 숫자를 입력하여주세요.");
         }
     }
 
-    private void validateDifferentNumber(String userAnswer) {
+    private static void validateDifferentNumber(String userAnswer) {
         int number = Integer.valueOf(userAnswer);
         Set<Integer> answerSet = new HashSet<>();
 
@@ -75,7 +68,7 @@ public class BaseBallGameManager {
         }
     }
 
-    private void validateInteger(String userAnswer) {
+    private static void validateInteger(String userAnswer) {
         try {
             int number = Integer.valueOf(userAnswer);
         } catch (NumberFormatException e) {
